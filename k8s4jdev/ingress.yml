@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s4jdev-ingress
+  namespace: k8s4jdev
+  labels:
+    app: k8s4jdev-ingress
+spec:
+  rules:
+    - host: geodata.local-minikube.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: geodata-app-service
+                port:
+                  number: 8080
