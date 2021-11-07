@@ -7,4 +7,4 @@ kubectl apply -f final/geodata-secret.yml
 kubectl apply -f final/geodata-service.yml
 kubectl apply -f final/geodata-app-deployment.yml
 
-kubectl apply -f k8s4jdev/ingress.yml
+#kubectl apply -f k8s4jdev/ingress.yml
