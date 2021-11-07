@@ -97,3 +97,21 @@ To cleanup minikube from all geodata related objects execute:
 ```bash
 ./kubectl-delete.sh
 ```
+
+## 4. Configuring minikube resources (CPU/memory)
+
+If minikube is lacking resources to run the objects created by the script above, you need to give it more cpu and memory than granted by default cnfiguration.
+
+On macosx run:
+
+```sh
+minikube start start --vm=true --cpus=2 --memory 6072
+```
+Note: vm option is requiered due to the bug in 1.14 version which prevents ingress from running. For more see [https://github.com/kubernetes/minikube/issues/7332](https://github.com/kubernetes/minikube/issues/7332)
+
+On Linux run:
+
+```sh
+minikube start start --cpus=2 --memory 6072
+```
+
