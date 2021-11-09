@@ -1,0 +1,36 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+version: '3.8'
+services:
+  geodataapp-app:
+    image: ag04/geodata-app:latest
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - DATASOURCE_URL=jdbc:postgresql://geodataapp-postgresql:5432/geodataApp
+      - DB_USER=geodataApp
+      - DB_PWD=
+      - DB_SCHEMA=public
+      - LIQUIBASE_CONTEXTS=dev
+      - MAIL_HOST=localhost
+      - MAIL_PORT=25
+      - MAIL_USERNAME=
+      - MAIL_PWD=
+      - APP_BASE_URL=http://localhost:8080
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - 127.0.0.1:8080:8080
+  geodataapp-postgresql:
+    image: postgres:13.3
+    # volumes:
+    #   - ~/volumes/jhipster/geodataApp/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=geodataApp
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - 127.0.0.1:5433:5432
