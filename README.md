@@ -70,7 +70,10 @@ sudo service postgresql restart
 ### 2.3. Add entires to /etc/hosts
 
 Add these entry to /etc/hosts file
+
+```
 MINIKUBE_IP    geodata.local-minikube.io
+```
 
 Change the address above with the IP address of minikube on your machine.
 
