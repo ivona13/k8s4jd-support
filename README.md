@@ -15,12 +15,25 @@ The next step is to create **geodata** user and his corresponding schema.
 To do so execute the following sql commands:
 
 ```sql
-CREATE ROLE geodataq NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN PASSWORD 'geodatapwd';
+CREATE ROLE geodata NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN PASSWORD 'geodatapwd';
 GRANT ALL PRIVILEGES ON DATABASE ag04 TO geodata;
 CREATE SCHEMA IF NOT EXISTS AUTHORIZATION "geodata";
 ```
 
 ## 2. Minikube setup
+
+Start minikube.
+
+On Linux
+
+```sh
+minikube start
+```
+On macosx
+
+```sh
+minikube start --vm=true
+```
 
 Find out IP address of your minikube cluster by running:
 
