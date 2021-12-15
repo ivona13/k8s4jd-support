@@ -2,10 +2,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: geodata-app-config
-  namespace: k8s4jdev
+  namespace: geodata
 data:
   spring_profiles_active: "prod,api-docs"
-  datasource_url: "jdbc:postgresql://postgres-db-svc:5432/ag04"
+  datasource_url: "jdbc:postgresql://postgres-db-svc.default:5432/ag04"
   geodata_db_user: "geodata"
   db_schema: "geodata"
   liquibase_contexts: "dev"

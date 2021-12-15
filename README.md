@@ -1,5 +1,5 @@
 # k8s4jd-support
-Kubernetes for Java developers project support files
+Kubernetes for Java developers project support files.
 
 ## 1. Database setup 
 (copy from geodata README.md)
@@ -66,52 +66,58 @@ On Ubuntu issue:
 ```bash
 sudo service postgresql restart
 ```
+Now it is time to create ExternalService that points to your host Postgres instance.
+
+```bash
+kubectl apply -f default/postgres-host-svc.yml
+```
 
 ### 2.3. Add entires to /etc/hosts
 
 Add these entry to /etc/hosts file
 
 ```
+MINIKUBE_IP    www.local-minikube.io
 MINIKUBE_IP    geodata.local-minikube.io
 ```
 
 Change the address above with the IP address of minikube on your machine.
 
-### 2.4 Install Reloader (optional)
+### 2.4 Install Reloader
 
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/stakater/Reloader/master/deployments/kubernetes/reloader.yaml
 ```
 
-Modify deployment yml
-
-```yml
-kind: Deployment
-apiVersion: apps/v1
-metadata:
-  name: geodata-app-deployment
-  namespace: k8s4jdev
-  labels:
-    app: geodata-app
-  annotations:
-    configmap.reloader.stakater.com/reload: "geodata-app-config"
-    secret.reloader.stakater.com/reload: "geodata-app-secret"
-...
-```
 
 ## 3. Deploy geodata-app to minikube
 
 Simply run the following script:
 
 ```bash
-./kubectl-create.sh
+./geodata-create.sh
 ```
 
 
 To cleanup minikube from all geodata related objects execute:
 
 ```bash
-./kubectl-delete.sh
+./geodata-delete.sh
+```
+
+**Test deployment**
+
+To test if everything is working properly, expose geodata-app by using this command:
+
+```bash
+kubectl expose deployment geodata-app-deployment --name geodata-app-lb \
+   --type LoadBalancer --port 80 --target-port 8000 -n geodata
+```
+
+**Expose geodata application with Ingress:**
+
+```bash
+kubectl apply -f default/ingress-ns-default.yml
 ```
 
 ## 4. Configuring minikube resources (CPU/memory)

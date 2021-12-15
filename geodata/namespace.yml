@@ -1,6 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: k8s4jdev
+  name: geodata
   labels:
-    name: k8s4jdev
+    name: geodata

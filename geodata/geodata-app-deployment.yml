@@ -2,13 +2,19 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: geodata-app-deployment
-  namespace: k8s4jdev
+  namespace: geodata
   labels:
     app: geodata-app
+  annotations:
+    configmap.reloader.stakater.com/reload: "geodata-app-config"
+    secret.reloader.stakater.com/reload: "geodata-app-secret"
 spec:
   replicas: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       deploy: geodata-app-pod
@@ -20,7 +26,7 @@ spec:
     spec:
       containers:
         - name: geodata-app
-          image: ag04/geodata-app:latest
+          image: ag04/geodata-app:0.0.6
           imagePullPolicy: Always
           env:
           - name: _JAVA_OPTIONS

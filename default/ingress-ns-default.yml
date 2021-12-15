@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: k8s4jdev-ingress
-  namespace: k8s4jdev
+  name: cluster-default-ingress
+  namespace: default
   labels:
-    app: k8s4jdev-ingress
+    app: ingress
 spec:
   rules:
     - host: geodata.local-minikube.io
@@ -14,6 +14,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: geodata-app-service
+                name: geodata-service-svc
                 port:
                   number: 8080
