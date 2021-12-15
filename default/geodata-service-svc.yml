@@ -5,6 +5,6 @@ metadata:
   namespace: default
 spec:
   type: ExternalName
-  externalName: geodata-app-service.k8s4jdev.svc.cluster.local
+  externalName: geodata-app-service.geodata.svc.cluster.local
   ports:
   - port: 8080
